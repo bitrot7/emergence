@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include <space.hpp>
+#include <unistd.h>
 
 // Simple function to draw a rectangle frame using text characters
 void draw_rectangle(int start_y, int start_x, int width, int height, char ch) {
@@ -23,6 +24,8 @@ int main() {
     cbreak();             // Disable line buffering (get input instantly)
     noecho();             // Don't print user keystrokes to the screen
     curs_set(0);          // Hide the physical blinking cursor
+    nodelay(stdscr, TRUE); // Enable non-blocking getch()
+
     Space s;
     s.Generate(5);
     s.ConnectSpace();
@@ -37,6 +40,11 @@ int main() {
     // 5. Wait for user input so the window doesn't immediately close
    
     do {
+        if(getch() == 'x')
+        {
+            break;
+        }
+
         clear();
         // 3. Draw shapes onto the terminal buffer
         // Syntax: draw_rectangle(y, x, width, height, character)
@@ -54,8 +62,9 @@ int main() {
 
         // 4. Refresh the physical screen to push the memory buffer to the terminal
         refresh();
+        usleep(100000);
     }
-    while(getch() != 'x');
+    while(1);
 
 
 

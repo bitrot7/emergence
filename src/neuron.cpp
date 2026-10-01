@@ -102,5 +102,5 @@ void Neuron::draw_neuron()
     disp += " | ";
     mvprintw(c_.y_, c_.x_*(disp.size()), disp.c_str());
     //mvprintw(10, 20, std::to_string(width).c_str());
-    mvaddch(value_*height, c_.x_+40, '#');              // Top side
+    mvaddch(value_*height, c_.x_+60, '#');              // Top side
 }
