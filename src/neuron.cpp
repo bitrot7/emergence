@@ -90,8 +90,17 @@ neuron_value Neuron::GetValue()
 
 void Neuron::draw_neuron()
 {
+
+    // Variables to store dimensions
+    int height, width;
+
+    // Get the maximum rows (height) and columns (width) of the standard screen
+    getmaxyx(stdscr, height, width);
+    
+
     std::string disp = std::to_string(value_);
     disp += " | ";
     mvprintw(c_.y_, c_.x_*(disp.size()), disp.c_str());
-    //mvaddch(c_.x_, c_.y_, '%');              // Top side
+    //mvprintw(10, 20, std::to_string(width).c_str());
+    mvaddch(value_*height, c_.x_+40, '#');              // Top side
 }
